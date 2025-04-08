@@ -3,6 +3,7 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"sync"
 
 	_ "github.com/lib/pq" // PostgreSQL driver
@@ -24,6 +25,9 @@ func Connect() (*sql.DB, error) {
 			"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 			cfg.DB.Host, cfg.DB.Port, cfg.DB.Username, cfg.DB.Password, cfg.DB.Database,
 		)
+
+		// Log the connection string for debugging
+		log.Printf("Connecting to database with: host=%s port=%s dbname=%s", cfg.DB.Host, cfg.DB.Port, cfg.DB.Database)
 
 		db, err = sql.Open("postgres", connStr)
 		if err != nil {

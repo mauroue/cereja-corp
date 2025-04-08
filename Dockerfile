@@ -26,6 +26,10 @@ RUN apk --no-cache add ca-certificates
 # Copy the binary from builder
 COPY --from=builder /app/cereja-corp .
 COPY --from=builder /app/config.json ./config.json
+COPY --from=builder /app/internal /root/internal
+
+# Create uploads directory
+RUN mkdir -p ./uploads/receipts
 
 # Expose port
 EXPOSE 8080

@@ -1,0 +1,125 @@
+{{ define "partials/receipt_items.html" }}
+<!-- Receipt items partial that will be loaded by HTMX -->
+{{ if .items }}
+<!-- Real data -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range .items }}
+        <tr>
+            <td>{{ .name }}</td>
+            <td>{{ .description }}</td>
+            <td>{{ .quantity }}</td>
+            <td>{{ .unit_price }}</td>
+            <td>{{ .total_price }}</td>
+        </tr>
+        {{ end }}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="4" class="text-right">Total:</th>
+            <th>{{ .total }}</th>
+        </tr>
+    </tfoot>
+</table>
+{{ else }}
+<!-- Sample data -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Bread</td>
+            <td>Whole grain bread</td>
+            <td>1</td>
+            <td>$5.99</td>
+            <td>$5.99</td>
+        </tr>
+        <tr>
+            <td>Milk</td>
+            <td>1L Milk</td>
+            <td>2</td>
+            <td>$4.50</td>
+            <td>$9.00</td>
+        </tr>
+        <tr>
+            <td>Eggs</td>
+            <td>Dozen eggs</td>
+            <td>1</td>
+            <td>$6.99</td>
+            <td>$6.99</td>
+        </tr>
+        <tr>
+            <td>Cheese</td>
+            <td>200g Cheese</td>
+            <td>1</td>
+            <td>$7.89</td>
+            <td>$7.89</td>
+        </tr>
+        <tr>
+            <td>Coffee</td>
+            <td>Ground coffee 500g</td>
+            <td>1</td>
+            <td>$12.99</td>
+            <td>$12.99</td>
+        </tr>
+        <tr>
+            <td>Apples</td>
+            <td>1kg Apples</td>
+            <td>1</td>
+            <td>$4.59</td>
+            <td>$4.59</td>
+        </tr>
+        <tr>
+            <td>Cereal</td>
+            <td>Breakfast cereal</td>
+            <td>1</td>
+            <td>$8.49</td>
+            <td>$8.49</td>
+        </tr>
+        <tr>
+            <td>Yogurt</td>
+            <td>Pack of 4</td>
+            <td>1</td>
+            <td>$7.99</td>
+            <td>$7.99</td>
+        </tr>
+        <tr>
+            <td>Butter</td>
+            <td>250g Butter</td>
+            <td>1</td>
+            <td>$4.99</td>
+            <td>$4.99</td>
+        </tr>
+        <tr>
+            <td>Orange Juice</td>
+            <td>1L Fresh juice</td>
+            <td>1</td>
+            <td>$9.99</td>
+            <td>$9.99</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="4" class="text-right">Total:</th>
+            <th>$78.90</th>
+        </tr>
+    </tfoot>
+</table>
+{{ end }}
+{{ end }} 

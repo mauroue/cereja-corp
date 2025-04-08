@@ -1,0 +1,52 @@
+{{ define "index.html" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }} - Receipt Scanner</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <div class="logo">Receipt Scanner</div>
+            <nav class="nav-links">
+                <a href="/receipts-web/">Home</a>
+                <a href="/receipts-web/upload">Upload</a>
+                <a href="/receipts-web/list">My Receipts</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Receipt Scanner App</h1>
+                </div>
+                <p>Welcome to the Receipt Scanner App! This application helps you track your purchases by scanning and storing your receipts.</p>
+                <p>With our app, you can:</p>
+                <ul>
+                    <li>Upload images of your receipts</li>
+                    <li>Automatically extract store, item, and price information</li>
+                    <li>Keep track of all your purchases in one place</li>
+                    <li>View detailed reports of your spending</li>
+                </ul>
+                <div class="mt-4">
+                    <a href="/receipts-web/upload" class="btn btn-primary">Upload a Receipt</a>
+                    <a href="/receipts-web/list" class="btn btn-secondary">View My Receipts</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; {{ .currentYear }} Receipt Scanner App</p>
+        </div>
+    </footer>
+</body>
+</html>
+{{ end }} 

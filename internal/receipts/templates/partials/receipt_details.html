@@ -1,0 +1,57 @@
+{{ define "partials/receipt_details.html" }}
+<!-- Receipt details partial that will be loaded by HTMX -->
+{{ if .receipt }}
+<!-- Real data -->
+<div class="receipt-details">
+    <div class="receipt-info">
+        <h2>Receipt Information</h2>
+        <table class="table">
+            <tr>
+                <th>Store:</th>
+                <td>{{ .receipt.store_name }}</td>
+            </tr>
+            <tr>
+                <th>Date:</th>
+                <td>{{ .receipt.date }}</td>
+            </tr>
+            <tr>
+                <th>Total Amount:</th>
+                <td>{{ .receipt.amount }}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="receipt-image">
+        <h2>Receipt Image</h2>
+        <img src="{{ .receipt.image_path }}" alt="Receipt Image"
+             onerror="this.onerror=null; this.src='/static/img/placeholder-receipt.jpg';">
+    </div>
+</div>
+{{ else }}
+<!-- Sample data -->
+<div class="receipt-details">
+    <div class="receipt-info">
+        <h2>Receipt Information</h2>
+        <table class="table">
+            <tr>
+                <th>Store:</th>
+                <td>Sample Store</td>
+            </tr>
+            <tr>
+                <th>Date:</th>
+                <td>May 10, 2023</td>
+            </tr>
+            <tr>
+                <th>Total Amount:</th>
+                <td>$78.90</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="receipt-image">
+        <h2>Receipt Image</h2>
+        <img src="/static/img/placeholder-receipt.jpg" alt="Receipt Image">
+    </div>
+</div>
+{{ end }}
+{{ end }} 

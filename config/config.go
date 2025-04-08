@@ -44,11 +44,11 @@ func Get() *Config {
 				WriteTimeout: 10,
 			},
 			DB: DBConfig{
-				Host:     "localhost",
+				Host:     "postgres",
 				Port:     "5432",
 				Username: "postgres",
 				Password: "postgres",
-				Database: "personal",
+				Database: "cereja",
 			},
 		}
 
@@ -65,6 +65,23 @@ func Get() *Config {
 			if err := decoder.Decode(config); err != nil {
 				log.Printf("Failed to decode config file: %v", err)
 			}
+		}
+
+		// Override with environment variables if they exist
+		if host := os.Getenv("DB_HOST"); host != "" {
+			config.DB.Host = host
+		}
+		if port := os.Getenv("DB_PORT"); port != "" {
+			config.DB.Port = port
+		}
+		if user := os.Getenv("DB_USER"); user != "" {
+			config.DB.Username = user
+		}
+		if password := os.Getenv("DB_PASSWORD"); password != "" {
+			config.DB.Password = password
+		}
+		if name := os.Getenv("DB_NAME"); name != "" {
+			config.DB.Database = name
 		}
 	})
 

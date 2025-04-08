@@ -1,0 +1,45 @@
+{{ define "partials/receipts_list.html" }}
+<!-- This will be loaded by HTMX into the list page -->
+
+{{ if .receipts }}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Store</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ range .receipts }}
+            <tr>
+                <td>{{ .store_name }}</td>
+                <td>{{ .date }}</td>
+                <td>{{ .amount }}</td>
+                <td>
+                    <a href="/receipts-web/view/{{ .id }}" class="btn btn-sm btn-info">View</a>
+                </td>
+            </tr>
+            {{ end }}
+        </tbody>
+    </table>
+</div>
+
+{{ if .hasMore }}
+<div class="mt-3 text-center">
+    <button class="btn btn-secondary" 
+            hx-get="/receipts-web/htmx/receipts?page={{ .nextPage }}" 
+            hx-target="#receipts-list" 
+            hx-swap="outerHTML">
+        Load More
+    </button>
+</div>
+{{ end }}
+
+{{ else }}
+<p>No receipts found. <a href="/receipts-web/upload">Upload your first receipt</a>.</p>
+{{ end }}
+
+{{ end }} 

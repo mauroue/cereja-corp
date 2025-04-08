@@ -34,6 +34,7 @@ cereja-corp/
 
 - Go 1.16+
 - PostgreSQL (optional, can use Docker)
+- AWS account (for Textract OCR functionality)
 
 ### Installation
 
@@ -42,12 +43,46 @@ cereja-corp/
    ```
    go mod tidy
    ```
-3. Run the application:
+3. Set up AWS credentials (required for Textract OCR):
+   - Set the AWS credentials using environment variables:
+     ```
+     export AWS_ACCESS_KEY_ID=your_access_key_id
+     export AWS_SECRET_ACCESS_KEY=your_secret_access_key
+     export AWS_REGION=your_preferred_region
+     ```
+   - Or configure AWS credentials using the AWS CLI:
+     ```
+     aws configure
+     ```
+4. Run the application:
    ```
    go run cmd/main.go
    ```
 
 The server will start on port 8080.
+
+## AWS Textract Integration
+
+The application uses AWS Textract for optical character recognition (OCR) of receipts. This allows for automatic extraction of:
+
+- Store name
+- Purchase date
+- Total amount
+- Individual items and prices
+
+### Configuration
+
+Configure AWS for Textract using environment variables:
+- `AWS_REGION`: AWS region where Textract service will be used (default: "us-east-1")
+- `AWS_ACCESS_KEY_ID`: Your AWS access key
+- `AWS_SECRET_ACCESS_KEY`: Your AWS secret key
+
+If AWS credentials are not provided or Textract is unavailable, the application will fall back to using mock data for testing purposes.
+
+### Permissions
+
+Ensure your AWS user has the following permissions:
+- `textract:AnalyzeExpense`
 
 ## API Endpoints
 
@@ -67,6 +102,13 @@ The server will start on port 8080.
 - `PUT /api/v1/notes/:id` - Update a note
 - `DELETE /api/v1/notes/:id` - Delete a note
 
+### Receipts API
+
+- `POST /receipts/upload` - Upload and process a receipt image
+- `GET /receipts/:id` - Get a specific receipt
+- `GET /receipts/:id/items` - Get items for a specific receipt
+- `GET /receipts` - List all receipts
+
 ## Development
 
 ### Running with Docker
@@ -85,4 +127,4 @@ To add new services, follow these steps:
 
 ## License
 
-This project is licensed under the MIT License. 
+This project is licensed under the MIT License.

@@ -57,4 +57,13 @@ help:
 	@echo "  make docs             - Generate Go docs"
 	@echo "  make fmt              - Format code"
 	@echo "  make lint             - Lint code"
-	@echo "  make tidy             - Tidy Go modules" 
+	@echo "  make tidy             - Tidy Go modules"
+
+# Migrate database
+migrate:
+	@echo "Migrating database..."
+	psql -U $(DB_USER) -h $(DB_HOST) -d $(DB_NAME) -f internal/receipts/migrations/001_create_receipts_tables.sql
+
+# Run this rule to initialize database for receipt scanner
+init-receipts: migrate
+	@echo "Receipt scanner database initialized" 
